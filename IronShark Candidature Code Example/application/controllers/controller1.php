@@ -31,9 +31,18 @@ class Controller1 {
 		$this->_registry->getObject('template')->buildPageFromTemplates('skeleton.tpl.html');
 		
 		// Add templates
+		$this->addHeadTemplate();
 		$this->addHeaderTemplate();
 		$this->addMainTemplate();
 		$this->addFooterTemplate();
+	}
+	
+	/**
+	 * Add head template and it's content
+	 * @return void
+	 */
+	private function addHeadTemplate() {
+		$this->_registry->getObject('template')->addTemplateBit('head', 'head.tpl.html');
 	}
 	
 	/**
@@ -50,7 +59,7 @@ class Controller1 {
 	 */
 	private function addMainTemplate() {
 		$this->_registry->getObject('template')->addTemplateBit('main', 'main.tpl.html');
-		$this->_registry->getObject('template')->getPage()->addTag('main_content', 'Hello World!');
+		$this->_registry->getObject('template')->getPage()->addTag('main_content', $this->_model->getContent());
 	}
 	
 	/**
